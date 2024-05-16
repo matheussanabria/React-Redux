@@ -1,5 +1,36 @@
 import React from 'react';
+import { createStore } from 'redux';
 import './App.css';
+import { type } from '@testing-library/user-event/dist/type';
+
+const reducer = (state,action) => {
+
+  if(action.type === "INC"){
+
+  // console.log('Incrementado!')
+  // console.log(action.payload);
+    
+    return state + action.payload; 
+  } 
+  else if(action.type === "DEC"){
+    return state - action.payload;
+  }
+  return state
+}
+
+const store = createStore(reducer,0);
+
+store.subscribe(() => {
+  console.log('O estado mudou',store.getState());
+})
+
+store.dispatch({type:'INC',payload: 1});
+store.dispatch({type:'DEC',payload: 1});
+store.dispatch({type:'INC',payload: 1});
+store.dispatch({type:'INC',payload: 1});
+store.dispatch({type:'INC',payload: 1});
+
+
 
 class App extends React.Component{
 
