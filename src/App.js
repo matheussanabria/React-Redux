@@ -1,15 +1,42 @@
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <h2>Hello Codificators</h2>
-      </header>
-    </div>
-  );
+class App extends React.Component{
+
+    constructor(props){
+      super(props);
+      this.state = {count:0};
+      this.increment = this.increment.bind(this);
+    }
+
+    increment = () => {
+      console.log("Incrementado!");
+
+      this.setState({
+        count: this.state.count + 1
+      })
+    }
+  
+    decrement = () => {
+      console.log("Decrementado!");
+
+      this.setState({
+        count: this.state.count - 1
+      })
+    }
+  
+
+    render(){
+      return(
+        <main className='App'>
+          <h2 className='text-center'>Hello World {this.state.count}</h2>
+          <button onClick={this.increment}>Incrementar!</button>
+          <button onClick={this.decrement}>Decrementar!</button>
+
+        </main>
+      );
+    }
+
 }
 
 export default App;
