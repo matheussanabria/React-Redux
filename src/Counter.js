@@ -3,6 +3,7 @@ import { createStore } from 'redux';
 import axios from 'axios';
 import './App.css';
 
+/*
 const reducer = (state,action) => {
 
   if(action.type === "INC"){
@@ -31,11 +32,11 @@ axios.get('https://my-json-server.typicode.com/typicode/demo/posts').then((respo
   console.log(response.data);
   store.dispatch({type: 'INFO',titulo:response.data[0].title});
 });
+*/
 
 
-
-class App extends React.Component{
-
+class Counter extends React.Component{
+  /*
     constructor(props){
       super(props);
       this.state = {count:0};
@@ -57,19 +58,29 @@ class App extends React.Component{
         count: this.state.count - 1
       })
     }
+  */
+
+    increment = () => {
+
+    }
+  
+    changeTitle = () => {
+      
+    }
   
 
     render(){
       return(
         <main className='App'>
           <h2 className='text-center'>Hello World {this.state.count}</h2>
-          <button onClick={this.increment}>Incrementar!</button>
-          <button onClick={this.decrement}>Decrementar!</button>
-
+            <button onClick={this.increment}>Incrementar!</button>
+            <button onClick={this.changeTitle}>Alterar Título!</button>
+          <h2>{this.props.count}</h2>
+          <h3>Título </h3>
         </main>
       );
     }
 
 }
 
-export default App;
+export default Counter;
