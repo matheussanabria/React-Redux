@@ -1,10 +1,27 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
+import { createRoot } from 'react-dom/client';  // Use createRoot instead of ReactDOM.render
 import './index.css';
-import App from './Counter';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import Counter from './Counter';
+
+const initialStates = { 
+    count: 0,
+    title: 'Codificadores',
+    name: 'Matheus'
+};
+
+function reducer(state = initialStates, action) {
+  return state;
+}
+
+const store = createStore(reducer);
 
 const App = () => (
-    <Counter count="10" />
-)
+  <Provider store={store}>
+    <Counter />
+  </Provider>
+);
 
-ReactDOM.render(<App />,document.getElementById('root'));
+const root = createRoot(document.getElementById('root'));  // Create a root
+root.render(<App />);  // Render the App component within the root

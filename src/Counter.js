@@ -1,86 +1,33 @@
 import React from 'react';
-import { createStore } from 'redux';
-import axios from 'axios';
-import './App.css';
+import { connect } from 'react-redux';
 
-/*
-const reducer = (state,action) => {
+class Counter extends React.Component {
+  increment = () => {
+    this.props.dispatch({ type: 'INC', payload: 1 });
+  };
 
-  if(action.type === "INC"){
-      return state + action.payload; 
-  } else if(action.type === "DEC"){
-      return state - action.payload;
-  } else if(action.type === 'info'){
-      console.log(action.title);
+  changeTitle = () => {
+    this.props.dispatch({ type: 'info', title: 'Novo Título' });
+  };
+
+  render() {
+    return (
+      <main className='App'>
+        <h2 className='text-center'>Hello World {this.props.count}</h2>
+        <button onClick={this.increment}>Incrementar!</button>
+        <button onClick={this.changeTitle}>Alterar Título!</button>
+        <h2>{this.props.count}</h2>
+        <h3>{this.props.title}</h3>
+        <h3>{this.props.name}</h3>
+      </main>
+    );
   }
-  return state;
 }
 
-const store = createStore(reducer,0);
+const mapStateToProps = state => ({
+  count: state.count,
+  title: state.title,
+  name: state.name
 
-store.subscribe(() => {
-  console.log('O estado mudou',store.getState());
-})
-
-store.dispatch({type:'INC',payload: 1});
-store.dispatch({type:'DEC',payload: 1});
-store.dispatch({type:'INC',payload: 1});
-store.dispatch({type:'INC',payload: 1});
-store.dispatch({type:'INC',payload: 1});
-
-axios.get('https://my-json-server.typicode.com/typicode/demo/posts').then((response) => {
-  console.log(response.data);
-  store.dispatch({type: 'INFO',titulo:response.data[0].title});
 });
-*/
-
-
-class Counter extends React.Component{
-  /*
-    constructor(props){
-      super(props);
-      this.state = {count:0};
-      this.increment = this.increment.bind(this);
-    }
-
-    increment = () => {
-      console.log("Incrementado!");
-
-      this.setState({
-        count: this.state.count + 1
-      })
-    }
-  
-    decrement = () => {
-      console.log("Decrementado!");
-
-      this.setState({
-        count: this.state.count - 1
-      })
-    }
-  */
-
-    increment = () => {
-
-    }
-  
-    changeTitle = () => {
-      
-    }
-  
-
-    render(){
-      return(
-        <main className='App'>
-          <h2 className='text-center'>Hello World {this.state.count}</h2>
-            <button onClick={this.increment}>Incrementar!</button>
-            <button onClick={this.changeTitle}>Alterar Título!</button>
-          <h2>{this.props.count}</h2>
-          <h3>Título </h3>
-        </main>
-      );
-    }
-
-}
-
-export default Counter;
+export default connect(mapStateToProps)(Counter);
