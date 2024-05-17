@@ -28,7 +28,8 @@ store.dispatch({type:'INC',payload: 1});
 store.dispatch({type:'INC',payload: 1});
 
 axios.get('https://my-json-server.typicode.com/typicode/demo/posts').then((response) => {
-  console.log(response)
+  console.log(response.data);
+  store.dispatch({type: 'INFO',titulo:response.data[0].title});
 });
 
 
