@@ -1,21 +1,18 @@
 import React from 'react';
 import { createStore } from 'redux';
+import axios from 'axios';
 import './App.css';
-import { type } from '@testing-library/user-event/dist/type';
 
 const reducer = (state,action) => {
 
   if(action.type === "INC"){
-
-  // console.log('Incrementado!')
-  // console.log(action.payload);
-    
-    return state + action.payload; 
-  } 
-  else if(action.type === "DEC"){
-    return state - action.payload;
+      return state + action.payload; 
+  } else if(action.type === "DEC"){
+      return state - action.payload;
+  } else if(action.type === 'info'){
+      console.log(action.title);
   }
-  return state
+  return state;
 }
 
 const store = createStore(reducer,0);
@@ -29,6 +26,10 @@ store.dispatch({type:'DEC',payload: 1});
 store.dispatch({type:'INC',payload: 1});
 store.dispatch({type:'INC',payload: 1});
 store.dispatch({type:'INC',payload: 1});
+
+axios.get('https://my-json-server.typicode.com/typicode/demo/posts').then((response) => {
+  console.log(response)
+});
 
 
 
